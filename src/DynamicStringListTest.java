@@ -82,5 +82,42 @@ public class DynamicStringListTest {
         list.add("C");
         assertEquals(4, list.capacity());
     }
+    @Test
+    void testGetInvalidIndexThrowsException() {
+        DynamicStringList list = new DynamicStringList();
+        list.add("A");
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(2));
+    }
+
+    @Test
+    void testSetInvalidIndexThrowsException() {
+        DynamicStringList list = new DynamicStringList();
+        list.add("A");
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(2, "X"));
+    }
+
+    @Test
+    void testRemoveInvalidIndexThrowsException() {
+        DynamicStringList list = new DynamicStringList();
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove(0));
+    }
+
+    @Test
+    void testAddBeyondInitialCapacityKeepsItems() {
+        DynamicStringList list = new DynamicStringList(2);
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        assertEquals("C", list.get(2));
+    }
+
+    @Test
+    void testSetMultipleTimes() {
+        DynamicStringList list = new DynamicStringList();
+        list.add("One");
+        list.set(0, "Two");
+        list.set(0, "Three");
+        assertEquals("Three", list.get(0));
+    }
 
 }
