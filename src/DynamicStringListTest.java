@@ -119,5 +119,24 @@ public class DynamicStringListTest {
         list.set(0, "Three");
         assertEquals("Three", list.get(0));
     }
+    @Test
+    void testRemoveFromMiddle() {
+        DynamicStringList list = new DynamicStringList();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.remove(1);
+        assertEquals("C", list.get(1));
+    }
 
+    @Test
+    void testSizeAfterMultipleAddsAndRemoves() {
+        DynamicStringList list = new DynamicStringList();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.remove(0);
+        list.add("D");
+        assertEquals(3, list.size());
+    }
 }
